@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Rafia Nasrin | Full-Stack Portfolio – Web Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for clean icons (optional but elegant) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      /* smooth scroll behavior & anchor offset fix */
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px; /* offset for fixed navbar */
+      }
+      /* scroll-trigger fade animations for skill items (reused from about) */
+      .skill-item {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+        transition:
+          opacity 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+          transform 0.6s ease-out;
+      }
+      .skill-item.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      /* sticky project cards hover & smooth effect */
+      .sticky-card {
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.3s ease;
+      }
+      .sticky-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 30px -12px rgba(0, 0, 0, 0.2);
+      }
+      /* active nav link indicator + subtle transition */
+      .nav-link {
+        transition:
+          color 0.2s,
+          border-bottom-color 0.2s;
+      }
+      .nav-link.active {
+        color: #2563eb;
+        border-bottom: 2px solid #2563eb;
+      }
+      /* form shake animation */
+      .shake-form {
+        animation: shake 0.4s ease-in-out 0s 1;
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-6px);
+        }
+        75% {
+          transform: translateX(6px);
+        }
+      }
+      .alert-slide {
+        animation: slideDown 0.3s ease forwards;
+      }
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .btn-loading {
+        opacity: 0.8;
+        cursor: default;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 text-gray-800 font-sans antialiased">
+    <!-- ========== FIXED NAVIGATION (SAME STYLE, SMOOTH LINKS TO SECTIONS) ========== -->
+    <nav
+      class="flex items-center justify-between px-6 md:px-10 py-5 bg-white/90 backdrop-blur-sm shadow-md sticky top-0 z-50 transition-all"
+    >
+      <div class="text-2xl font-bold tracking-wider text-blue-600">
+        <a href="#home" class="hover:opacity-80 transition">RN</a>
+      </div>
+      <div
+        class="space-x-6 md:space-x-8 text-sm font-medium uppercase tracking-wide"
+      >
+        <a
+          href="#home"
+          class="nav-link hover:text-blue-600 transition pb-1 border-b-2 border-transparent"
+          >Home</a
+        >
+        <a
+          href="#about"
+          class="nav-link hover:text-blue-600 transition pb-1 border-b-2 border-transparent"
+          >About Me</a
+        >
+        <a
+          href="#projects"
+          class="nav-link hover:text-blue-600 transition pb-1 border-b-2 border-transparent"
+          >Projects</a
+        >
+        <a
+          href="#contact"
+          class="nav-link hover:text-blue-600 transition pb-1 border-b-2 border-transparent"
+          >Contact Us</a
+        >
+      </div>
+    </nav>
+
+    <main>
+      <!-- ==================== SECTION: HOME / HERO (original index hero) ==================== -->
+      <section
+        id="home"
+        class="min-h-[90vh] flex items-center px-6 md:px-12 py-12 scroll-mt-20"
+      >
+        <div class="max-w-7xl mx-auto w-full">
+          <div class="flex flex-col md:flex-row items-center gap-12 md:gap-16">
+            <!-- LEFT: Name + intro -->
+            <div class="flex-1 text-center md:text-left">
+              <h1
+                class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4"
+              >
+                Rafia Nasrin
+              </h1>
+              <div
+                class="inline-block bg-blue-100 text-blue-700 text-sm font-semibold px-3 py-1 rounded-full mb-4"
+              >
+                Web Developer
+              </div>
+              <p
+                class="text-lg text-gray-600 leading-relaxed max-w-lg mx-auto md:mx-0"
+              >
+                I am a passionate
+                <span class="font-semibold text-blue-600">Web Developer</span>
+                dedicated to building modern, responsive, and user-friendly web
+                applications. I turn complex problems into elegant digital
+                solutions with clean code and intuitive design.
+              </p>
+              <div
+                class="flex flex-col sm:flex-row gap-4 mt-8 justify-center md:justify-start"
+              >
+                <a
+                  href="#contact"
+                  class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition text-center"
+                  >Contact Me</a
+                >
+                <a
+                  href="#"
+                  id="downloadCvBtn"
+                  class="px-8 py-3 bg-white text-blue-600 font-semibold rounded-lg border border-blue-600 shadow-sm hover:bg-blue-50 transition text-center"
+                  >Download CV</a
+                >
+              </div>
+            </div>
+            <!-- RIGHT: Profile Image -->
+            <div class="flex-1 flex justify-center md:justify-end">
+              <div
+                class="w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-white shadow-xl overflow-hidden bg-gray-100"
+              >
+                <img
+                  src="my-image.png"
+                  alt="Rafia Nasrin"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION: ABOUT ME (merged from about.html with scroll animations) ==================== -->
+      <section
+        id="about"
+        class="max-w-6xl mx-auto px-6 py-16 scroll-mt-20 border-t border-gray-100"
+      >
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">
+            About Me
+          </h2>
+          <div class="w-20 h-1 bg-blue-600 mx-auto mb-6"></div>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            I'm a frontend developer who loves building things that live on the
+            web. I turn ideas into fast, responsive, and user-friendly web
+            applications. Clean code, thoughtful design, and continuous learning
+            drive everything I do.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 mt-8">
+          <!-- LEFT: Work Experience -->
+          <div>
+            <h3
+              class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3"
+            >
+              <svg
+                class="w-6 h-6 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                ></path>
+              </svg>
+              Work Experience
+            </h3>
+            <div
+              class="skill-item bg-white rounded-xl shadow-md border border-gray-100 p-6 mb-6 hover:shadow-lg transition-shadow"
+            >
+              <div
+                class="flex items-start justify-between flex-wrap gap-2 mb-3"
+              >
+                <h4 class="text-xl font-bold text-gray-900">
+                  Frontend Developer
+                </h4>
+                <span
+                  class="text-sm text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-full"
+                  >2025 - Present</span
+                >
+              </div>
+              <p class="text-blue-600 font-medium mb-3">Contradox</p>
+              <p class="text-gray-600 leading-relaxed">
+                Developed and maintained responsive web interfaces using HTML,
+                CSS, and JavaScript. Collaborated with design teams to implement
+                pixel-perfect layouts and improved website performance through
+                optimized code practices.
+              </p>
+              <div class="flex flex-wrap gap-2 mt-4">
+                <span
+                  class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded"
+                  >HTML5</span
+                >
+                <span
+                  class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded"
+                  >CSS3</span
+                >
+                <span
+                  class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded"
+                  >JavaScript</span
+                >
+                <span
+                  class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded"
+                  >Responsive Design</span
+                >
+              </div>
+            </div>
+            <div class="bg-blue-50 rounded-xl p-6 border border-blue-100">
+              <h4 class="font-bold text-gray-800 mb-2">
+                💡 Currently Learning
+              </h4>
+              <p class="text-gray-600 text-sm">
+                I'm actively expanding my skills in modern frameworks and
+                backend technologies to become a more versatile full-stack
+                developer.
+              </p>
+            </div>
+          </div>
+
+          <!-- RIGHT: Technical Skills -->
+          <div>
+            <h3
+              class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-3"
+            >
+              <svg
+                class="w-6 h-6 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                ></path>
+              </svg>
+              Technical Skills
+            </h3>
+            <div class="space-y-6">
+              <div class="skill-item">
+                <div class="flex justify-between mb-2 font-medium">
+                  <span>HTML5 & CSS3</span
+                  ><span class="text-blue-600">90%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-blue-600 h-2.5 rounded-full w-[90%]"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">
+                  Semantic HTML, Flexbox, Grid, Animations
+                </p>
+              </div>
+              <div class="skill-item">
+                <div class="flex justify-between mb-2 font-medium">
+                  <span>JavaScript</span><span class="text-blue-600">85%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-blue-600 h-2.5 rounded-full w-[85%]"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">
+                  ES6+, DOM Manipulation, Fetch API, Events
+                </p>
+              </div>
+              <div class="skill-item">
+                <div class="flex justify-between mb-2 font-medium">
+                  <span>Tailwind CSS</span
+                  ><span class="text-blue-600">80%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-blue-600 h-2.5 rounded-full w-[80%]"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">
+                  Utility-first styling, Responsive design
+                </p>
+              </div>
+              <div class="skill-item">
+                <div class="flex justify-between mb-2 font-medium">
+                  <span>Vibe Coding / AI Tools</span
+                  ><span class="text-blue-600">75%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-blue-600 h-2.5 rounded-full w-[75%]"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">
+                  Leveraging AI for faster development workflow
+                </p>
+              </div>
+              <div class="skill-item">
+                <div class="flex justify-between mb-2 font-medium">
+                  <span>Git & Version Control</span
+                  ><span class="text-blue-600">70%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                  <div class="bg-blue-600 h-2.5 rounded-full w-[70%]"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">
+                  Basic Git commands, GitHub workflow
+                </p>
+              </div>
+            </div>
+            <div class="mt-8 p-5 border border-gray-200 rounded-xl bg-white">
+              <h4 class="font-bold text-gray-800 mb-3">🎯 Learning Roadmap</h4>
+              <div class="flex flex-wrap gap-2">
+                <span
+                  class="px-3 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full"
+                  >React.js</span
+                ><span
+                  class="px-3 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full"
+                  >Node.js</span
+                ><span
+                  class="px-3 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full"
+                  >TypeScript</span
+                ><span
+                  class="px-3 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full"
+                  >Next.js</span
+                ><span
+                  class="px-3 py-1.5 bg-gray-100 text-gray-700 text-sm rounded-full"
+                  >MongoDB</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION: PROJECTS (sticky pattern from projects.html, compact but full) ==================== -->
+      <section id="projects" class="bg-gray-50 scroll-mt-20">
+        <div
+          class="py-16 text-center bg-gradient-to-r from-blue-50 to-indigo-50"
+        >
+          <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-3">
+            My Projects
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto px-4">
+            Explore my collection of web applications. Each project is built
+            with modern web technologies and focuses on clean code, responsive
+            design, and great user experience.
+          </p>
+        </div>
+        <div class="max-w-5xl mx-auto px-6 py-16">
+          <div class="space-y-8">
+            <!-- Project 1: Todo -->
+            <div
+              class="sticky-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200"
+              style="position: relative; top: 0"
+            >
+              <div class="flex flex-col md:flex-row">
+                <div
+                  class="md:w-2/5 bg-gradient-to-br from-emerald-500 to-teal-600 p-8 flex items-center justify-center"
+                >
+                  <div class="text-center text-white">
+                    <svg
+                      class="w-16 h-16 mx-auto mb-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                      ></path>
+                    </svg>
+                    <p class="text-sm font-medium opacity-90">
+                      Live Demo Available
+                    </p>
+                  </div>
+                </div>
+                <div class="md:w-3/5 p-8">
+                  <span
+                    class="text-xs font-bold text-emerald-600 uppercase tracking-wider bg-emerald-100 px-3 py-1 rounded-full"
+                    >Completed Project</span
+                  >
+                  <h3 class="text-2xl font-bold text-gray-900 mt-3 mb-3">
+                    TaskFlow - To-Do List App
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed mb-4">
+                    Feature-rich task management with local storage, dark mode
+                    toggle, task filtering (All/Active/Completed), and
+                    persistent storage.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-5">
+                    <span
+                      class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      >HTML5</span
+                    ><span
+                      class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      >CSS3</span
+                    ><span
+                      class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      >JavaScript</span
+                    ><span
+                      class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      >LocalStorage</span
+                    >
+                  </div>
+                  <div class="flex gap-3 flex-wrap">
+                    <a
+                      href="https://rafianasrinmuntaha.github.io/Todo_app/"
+                      target="_blank"
+                      class="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition shadow-md"
+                      >🔗 Live Demo</a
+                    ><a
+                      href="https://github.com/RafiaNasrinMuntaha/Todo_app"
+                      target="_blank"
+                      class="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition shadow-md"
+                      >📂 GitHub Repo</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Project 2: Weather App -->
+            <div
+              class="sticky-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200"
+            >
+              <div class="flex flex-col md:flex-row-reverse">
+                <div
+                  class="md:w-2/5 bg-gradient-to-br from-blue-500 to-indigo-600 p-8 flex items-center justify-center"
+                >
+                  <div class="text-center text-white">
+                    <svg
+                      class="w-16 h-16 mx-auto mb-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"
+                      ></path>
+                    </svg>
+                    <p class="text-sm font-medium opacity-90">Live Demo</p>
+                  </div>
+                </div>
+                <div class="md:w-3/5 p-8">
+                  <span
+                    class="text-xs font-bold text-blue-600 uppercase bg-blue-100 px-3 py-1 rounded-full"
+                    >Completed</span
+                  >
+                  <h3 class="text-2xl font-bold text-gray-900 mt-3 mb-3">
+                    Weather App
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed mb-4">
+                    Real-time weather data using OpenWeatherMap API. Search any
+                    city, get temperature, humidity, wind speed, and dynamic
+                    weather icons.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-5">
+                    <span
+                      class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      >HTML5/CSS3</span
+                    ><span
+                      class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      >JavaScript</span
+                    ><span
+                      class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      >REST API</span
+                    >
+                  </div>
+                  <div class="flex gap-3 flex-wrap">
+                    <a
+                      href="https://rafianasrinmuntaha.github.io/Weather_App/"
+                      target="_blank"
+                      class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition shadow-md"
+                      >🔗 Live Demo</a
+                    ><a
+                      href="https://github.com/RafiaNasrinMuntaha/Weather_App"
+                      target="_blank"
+                      class="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition shadow-md"
+                      >📂 GitHub Repo</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Project 3: Recipe Finder -->
+            <div
+              class="sticky-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200"
+            >
+              <div class="flex flex-col md:flex-row">
+                <div
+                  class="md:w-2/5 bg-gradient-to-br from-orange-500 to-red-600 p-8 flex items-center justify-center"
+                >
+                  <div class="text-center text-white">
+                    <svg
+                      class="w-16 h-16 mx-auto mb-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                      ></path>
+                    </svg>
+                    <p class="text-sm font-medium opacity-90">Live Demo</p>
+                  </div>
+                </div>
+                <div class="md:w-3/5 p-8">
+                  <span
+                    class="text-xs font-bold text-orange-600 uppercase bg-orange-100 px-3 py-1 rounded-full"
+                    >Completed</span
+                  >
+                  <h3 class="text-2xl font-bold text-gray-900 mt-3 mb-3">
+                    Recipe Finder App
+                  </h3>
+                  <p class="text-gray-600 leading-relaxed mb-4">
+                    Search recipes by ingredients or dish name using TheMealDB
+                    API. Detailed instructions, ingredient list, and meal
+                    suggestions from different cuisines.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mb-5">
+                    <span
+                      class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      >HTML/CSS/JS</span
+                    ><span
+                      class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      >TheMealDB API</span
+                    ><span
+                      class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
+                      >Async/Await</span
+                    >
+                  </div>
+                  <div class="flex gap-3 flex-wrap">
+                    <a
+                      href="https://rafianasrinmuntaha.github.io/RecipeFinder_App/"
+                      target="_blank"
+                      class="inline-flex items-center gap-2 px-5 py-2.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition shadow-md"
+                      >🔗 Live Demo</a
+                    ><a
+                      href="https://github.com/RafiaNasrinMuntaha/RecipeFinder_App"
+                      target="_blank"
+                      class="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition shadow-md"
+                      >📂 GitHub Repo</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="mt-16 text-center p-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border border-blue-100"
+          >
+            <svg
+              class="w-14 h-14 text-gray-800 mx-auto mb-3"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+              />
+            </svg>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">
+              View All Projects on GitHub
+            </h3>
+            <p class="text-gray-600 mb-4">
+              Follow my coding journey and explore all my repositories
+            </p>
+            <a
+              href="https://github.com/RafiaNasrinMuntaha"
+              target="_blank"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-900 transition shadow-md"
+              ><i class="fab fa-github text-lg"></i> Visit My GitHub Profile</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== SECTION: CONTACT US (fully functional email client) ==================== -->
+      <section id="contact" class="max-w-6xl mx-auto px-6 py-16 scroll-mt-20">
+        <div class="grid md:grid-cols-2 gap-10">
+          <!-- Contact Form (working email prepopulate) -->
+          <div
+            class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100"
+          >
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">
+              Send a Message
+            </h2>
+            <div id="formStatus" class="mb-5 hidden"></div>
+            <form id="singleContactForm" novalidate>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-2"
+                    >First Name *</label
+                  ><input
+                    type="text"
+                    id="firstName"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                  <div
+                    class="text-red-500 text-xs mt-1 hidden"
+                    id="firstNameError"
+                  >
+                    First name is required
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-semibold text-gray-700 mb-2"
+                    >Last Name *</label
+                  ><input
+                    type="text"
+                    id="lastName"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                  <div
+                    class="text-red-500 text-xs mt-1 hidden"
+                    id="lastNameError"
+                  >
+                    Last name is required
+                  </div>
+                </div>
+              </div>
+              <div class="mb-5">
+                <label class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Email Address *</label
+                ><input
+                  type="email"
+                  id="contactEmail"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                />
+                <div class="text-red-500 text-xs mt-1 hidden" id="emailError">
+                  Valid email required
+                </div>
+              </div>
+              <div class="mb-5">
+                <label class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Phone Number</label
+                ><input
+                  type="tel"
+                  id="phone"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                />
+              </div>
+              <div class="mb-6">
+                <label class="block text-sm font-semibold text-gray-700 mb-2"
+                  >Your Message *</label
+                ><textarea
+                  id="contactMsg"
+                  rows="5"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+                ></textarea>
+                <div class="text-red-500 text-xs mt-1 hidden" id="messageError">
+                  Message cannot be empty
+                </div>
+              </div>
+              <button
+                type="submit"
+                id="contactSubmitBtn"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition flex items-center justify-center gap-2 shadow-md"
+              >
+                <span>Send Message</span> <i class="fas fa-paper-plane"></i>
+              </button>
+              <p class="text-xs text-gray-400 text-center mt-4">
+                * Required fields. I'll respond within 24-48 hours.
+              </p>
+            </form>
+          </div>
+          <!-- Right side: Profile & social unchanged -->
+          <div class="space-y-6">
+            <div
+              class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 text-center border border-blue-100"
+            >
+              <div
+                class="w-28 h-28 rounded-full bg-white border-4 border-blue-600 shadow-lg mx-auto mb-4 overflow-hidden"
+              >
+                <img
+                  src="my-image.png"
+                  alt="Rafia Nasrin"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900">Rafia Nasrin</h3>
+              <p class="text-blue-600 font-medium mb-4">Web Developer</p>
+              <div class="space-y-3 text-left max-w-xs mx-auto">
+                <div class="flex items-center gap-3 text-gray-700">
+                  <svg
+                    class="w-5 h-5 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    ></path></svg
+                  ><a
+                    href="mailto:rafianasrin20@gmail.com"
+                    class="hover:text-blue-600 break-all"
+                    >rafianasrin20@gmail.com</a
+                  >
+                </div>
+                <div class="flex items-center gap-3 text-gray-700">
+                  <svg
+                    class="w-5 h-5 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    ></path></svg
+                  ><a href="tel:01314312484" class="hover:text-blue-600"
+                    >01314312484</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div
+              class="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 text-center"
+            >
+              <h3 class="text-xl font-bold text-gray-900 mb-6">
+                Connect With Me
+              </h3>
+              <div class="flex flex-col gap-4">
+                <a
+                  href="https://www.linkedin.com/in/rafia-nasrin-081a67317"
+                  target="_blank"
+                  class="flex items-center justify-center gap-3 px-6 py-3 bg-blue-50 hover:bg-blue-100 rounded-xl transition"
+                  ><i class="fab fa-linkedin text-blue-700 text-xl"></i
+                  ><span class="font-semibold text-gray-800">LinkedIn</span
+                  ><span class="text-sm text-gray-500 ml-auto">→</span></a
+                ><a
+                  href="https://www.facebook.com/rafia.nasrin.14"
+                  target="_blank"
+                  class="flex items-center justify-center gap-3 px-6 py-3 bg-blue-50 hover:bg-blue-100 rounded-xl transition"
+                  ><i class="fab fa-facebook text-blue-700 text-xl"></i
+                  ><span class="font-semibold text-gray-800">Facebook</span
+                  ><span class="text-sm text-gray-500 ml-auto">→</span></a
+                ><a
+                  href="https://github.com/RafiaNasrinMuntaha"
+                  target="_blank"
+                  class="flex items-center justify-center gap-3 px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-xl transition"
+                  ><i class="fab fa-github text-xl"></i
+                  ><span class="font-semibold">GitHub</span
+                  ><span class="text-sm text-gray-400 ml-auto">→</span></a
+                >
+              </div>
+              <div class="mt-6 pt-4 border-t border-gray-100">
+                <p class="text-sm text-gray-500">
+                  Typically responds within 24 hours
+                </p>
+                <p class="text-sm text-gray-500 mt-1">🌍 Based in Bangladesh</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="py-10 text-center text-gray-400 text-sm border-t border-gray-200"
+    >
+      &copy; 2026 Rafia Nasrin. All rights reserved.
+    </footer>
+
+    <script>
+      // Intersection Observer for skill items (fade effect)
+      const skillItems = document.querySelectorAll(".skill-item");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.2 },
+      );
+      skillItems.forEach((item) => observer.observe(item));
+
+      // ---------- ACTIVE NAV HIGHLIGHT ON SCROLL ----------
+      const sections = document.querySelectorAll("section[id]");
+      const navLinks = document.querySelectorAll(".nav-link");
+      function updateActiveNav() {
+        let current = "";
+        const scrollPos = window.scrollY + 100;
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight)
+            current = section.getAttribute("id");
+        });
+        navLinks.forEach((link) => {
+          link.classList.remove(
+            "active",
+            "border-b-2",
+            "border-blue-600",
+            "text-blue-600",
+          );
+          if (link.getAttribute("href") === `#${current}`) {
+            link.classList.add(
+              "active",
+              "border-b-2",
+              "border-blue-600",
+              "text-blue-600",
+            );
+          } else {
+            link.classList.remove("text-blue-600");
+            link.style.borderBottomColor = "transparent";
+          }
+        });
+      }
+      window.addEventListener("scroll", updateActiveNav);
+      updateActiveNav();
+
+      // Download CV trigger (simulated, keeps original naming)
+      document
+        .getElementById("downloadCvBtn")
+        ?.addEventListener("click", (e) => {
+          e.preventDefault();
+          alert(
+            "CV download simulation — you would link actual file: my-cv.pdf",
+          );
+        });
+
+      // Contact form fully working (opens email client with prefilled)
+      const form = document.getElementById("singleContactForm");
+      const statusDiv = document.getElementById("formStatus");
+      const submitBtn = document.getElementById("contactSubmitBtn");
+      const firstName = document.getElementById("firstName"),
+        lastName = document.getElementById("lastName"),
+        email = document.getElementById("contactEmail"),
+        phone = document.getElementById("phone"),
+        msg = document.getElementById("contactMsg");
+      const firstNameErr = document.getElementById("firstNameError"),
+        lastNameErr = document.getElementById("lastNameError"),
+        emailErr = document.getElementById("emailError"),
+        msgErr = document.getElementById("messageError");
+      function clearInlineErrors() {
+        [firstNameErr, lastNameErr, emailErr, msgErr].forEach((e) =>
+          e?.classList.add("hidden"),
+        );
+        [firstName, lastName, email, msg].forEach((inp) => {
+          if (inp) inp.classList.remove("border-red-500");
+        });
+      }
+      function showFieldError(input, errEl, txt) {
+        if (errEl) {
+          errEl.textContent = txt;
+          errEl.classList.remove("hidden");
+        }
+        if (input) input.classList.add("border-red-500");
+      }
+      function validateContact() {
+        clearInlineErrors();
+        let valid = true;
+        if (!firstName.value.trim()) {
+          showFieldError(firstName, firstNameErr, "First name required");
+          valid = false;
+        }
+        if (!lastName.value.trim()) {
+          showFieldError(lastName, lastNameErr, "Last name required");
+          valid = false;
+        }
+        const emailVal = email.value.trim();
+        const emailPat = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+        if (!emailVal) {
+          showFieldError(email, emailErr, "Email required");
+          valid = false;
+        } else if (!emailPat.test(emailVal)) {
+          showFieldError(email, emailErr, "Valid email required");
+          valid = false;
+        }
+        if (!msg.value.trim()) {
+          showFieldError(msg, msgErr, "Message required");
+          valid = false;
+        } else if (msg.value.trim().length < 3) {
+          showFieldError(msg, msgErr, "At least 3 characters");
+          valid = false;
+        }
+        return valid;
+      }
+      function showStatus(message, type) {
+        if (!statusDiv) return;
+        statusDiv.classList.remove("hidden");
+        statusDiv.className = `mb-5 p-4 rounded-lg shadow-sm alert-slide ${type === "success" ? "bg-green-50 border border-green-200 text-green-800" : "bg-red-50 border border-red-200 text-red-700"}`;
+        statusDiv.innerHTML = `<i class="${type === "success" ? "fas fa-check-circle" : "fas fa-exclamation-triangle"} mr-2"></i>${message}`;
+        setTimeout(() => statusDiv.classList.add("hidden"), 5000);
+      }
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (!validateContact()) {
+          showStatus("Please fix highlighted fields.", "error");
+          const card = document.querySelector(
+            ".bg-white.rounded-2xl.shadow-xl",
+          );
+          if (card) card.classList.add("shake-form");
+          setTimeout(() => card?.classList.remove("shake-form"), 500);
+          return;
+        }
+        const fullName = `${firstName.value.trim()} ${lastName.value.trim()}`;
+        const subject = `Portfolio Contact: ${fullName}`;
+        let body = `Name: ${fullName}\nEmail: ${email.value.trim()}\n`;
+        if (phone.value.trim()) body += `Phone: ${phone.value.trim()}\n`;
+        body += `\n--- Message ---\n${msg.value.trim()}\n\nSent from contact form.`;
+        const mailto = `mailto:rafianasrin20@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailto;
+        showStatus(
+          "✅ Email draft ready! Just hit send. Thank you!",
+          "success",
+        );
+        form.reset();
+        clearInlineErrors();
+      });
+      // live inline clear
+      [firstName, lastName, email, msg].forEach((inp) =>
+        inp?.addEventListener("input", function () {
+          this.classList.remove("border-red-500");
+          const errId =
+            this.id === "contactEmail"
+              ? "emailError"
+              : this.id === "firstName"
+                ? "firstNameError"
+                : this.id === "lastName"
+                  ? "lastNameError"
+                  : "messageError";
+          document.getElementById(errId)?.classList.add("hidden");
+        }),
+      );
+    </script>
+  </body>
+</html>
